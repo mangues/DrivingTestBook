@@ -78,17 +78,101 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;
 }
-
+/**
+ *  @author mangues, 15-09-08 16:09:38
+ *
+ *  自动头部高度
+ *
+ *  @param tableView
+ *  @param section
+ *
+ *  @return
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 100;
+    CGFloat height = [[[self getHeightHeaderInSection:tableView] lastObject] floatValue];
+    return height;
 }
-
+/**
+ *  @author mangues, 15-09-08 17:09:46
+ *
+ *  头部 题目问题
+ *
+ *  @param tableView <#tableView description#>
+ *  @param section
+ *
+ *  @return
+ */
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SIZE.width, 100)];
-    view.backgroundColor = [UIColor redColor];
+    CGFloat height = [[[self getHeightHeaderInSection:tableView] lastObject] floatValue];
+    NSString *str = (NSString*)[[self getHeightHeaderInSection:tableView] firstObject];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SIZE.width, height)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.frame.size.width-20, height-20)];
+    label.text = [NSString stringWithFormat:@"%d,%@",[self getPageInt:tableView andCurrentPage:_currentPage],str];
+    label.font = [UIFont systemFontOfSize:16];
+    label.numberOfLines = 0;
+    [view addSubview:label];
     return view;
 }
 
+/**
+ *  @author mangues, 15-09-08 17:09:22
+ *
+ *  底部高度
+ *
+ *  @param tableView
+ *  @param section
+ *
+ *  @return
+ */
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    AnswerModel *model = [self getAnswerModel:tableView];
+    UIFont *font = [UIFont systemFontOfSize:(CGFloat)16];
+    NSString *str = [NSString stringWithFormat:@"答案解析：%@", model.mdesc];
+    
+    CGFloat height = [Tools getSizeWithString:str withFont:font withSize:CGSizeMake(tableView.frame.size.width-20, 400)].height+20;
+
+    return height;
+}
+
+/**
+ *  @author mangues, 15-09-08 17:09:06
+ *
+ *  底部view
+ *
+ *  @param tableView
+ *  @param section
+ *
+ *  @return
+ */
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    AnswerModel *model = [self getAnswerModel:tableView];
+    UIFont *font = [UIFont systemFontOfSize:(CGFloat)16];
+    NSString *str = [NSString stringWithFormat:@"答案解析：%@", model.mdesc];
+    CGFloat height = [Tools getSizeWithString:str withFont:font withSize:CGSizeMake(tableView.frame.size.width-20, 400)].height+20;
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SIZE.width, height)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, tableView.frame.size.width-20, height-20)];
+    label.text = str;
+    label.font = [UIFont systemFontOfSize:16];
+    label.numberOfLines = 0;
+    view.backgroundColor = [UIColor greenColor];
+    [view addSubview:label];
+    return view;
+}
+
+
+
+
+/**
+ *  @author mangues, 15-09-08 17:09:04
+ *
+ *  table 的cell
+ *
+ *  @param tableView
+ *  @param indexPath
+ *
+ *  @return
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *cellIdentifier=@"AnswerTableViewCell";
@@ -102,23 +186,7 @@
     }
     cell.numberLabel.text = [NSString stringWithFormat:@"%c",(char)('A'+indexPath.row)];
     
-    AnswerModel *model= [[AnswerModel alloc]init];
-    if (tableView==_leftTableView&&_currentPage==0) { //第一页
-        model = _dataArray[_currentPage];
-    }else if(tableView==_leftTableView&&_currentPage>0){
-        model = _dataArray[_currentPage-1];
-    }else if (tableView==_centerTableView&&_currentPage==0) {
-        model = _dataArray[_currentPage+1];
-    }else if(tableView==_centerTableView&&_currentPage>0&&_currentPage<_dataArray.count-1){
-        model = _dataArray[_currentPage];
-    }else if (tableView==_centerTableView&&_currentPage==_dataArray.count-1) {
-        model = _dataArray[_currentPage-1];
-    }else if(tableView==_rightTableView&&_currentPage==_dataArray.count-1){
-        model = _dataArray[_currentPage];
-    }else if(tableView==_rightTableView&&_currentPage<_dataArray.count-1){
-        model = _dataArray[_currentPage+1];
-    }
-    
+    AnswerModel *model = [self getAnswerModel:tableView];
     if ([model.mtype intValue]==1) {
         cell.contentAn.text = [[Tools getAnswerWithString:model.mquestion] objectAtIndex:indexPath.row+1];
     }
@@ -145,10 +213,107 @@
     [self reloadData];   //重新加载数据
 }
 
-
+/**
+ *  @author mangues, 15-09-08 15:09:41
+ *
+ *  刷新tableview
+ */
 -(void)reloadData{
     [_leftTableView reloadData];
     [_centerTableView reloadData];
     [_rightTableView reloadData];
 }
+
+
+/**
+ *  @author mangues, 15-09-08 16:09:04
+ *
+ *  获取合适的model
+ *
+ *  @param tableView
+ *
+ *  @return
+ */
+- (AnswerModel *)getAnswerModel:(UITableView*) tableView{
+    AnswerModel *model= [[AnswerModel alloc]init];
+    if (tableView==_leftTableView&&_currentPage==0) { //第一页
+        model = _dataArray[_currentPage];
+    }else if(tableView==_leftTableView&&_currentPage>0){
+        model = _dataArray[_currentPage-1];
+    }else if (tableView==_centerTableView&&_currentPage==0) {
+        model = _dataArray[_currentPage+1];
+    }else if(tableView==_centerTableView&&_currentPage>0&&_currentPage<_dataArray.count-1){
+        model = _dataArray[_currentPage];
+    }else if (tableView==_centerTableView&&_currentPage==_dataArray.count-1) {
+        model = _dataArray[_currentPage-1];
+    }else if(tableView==_rightTableView&&_currentPage==_dataArray.count-1){
+        model = _dataArray[_currentPage];
+    }else if(tableView==_rightTableView&&_currentPage<_dataArray.count-1){
+        model = _dataArray[_currentPage+1];
+    }
+    return model;
+
+}
+
+
+
+- (int)getPageInt:(UITableView *)tableView andCurrentPage:(int)page{
+    if (tableView==_leftTableView&&page==0) { //第一页
+        return 1;
+    }else if(tableView==_leftTableView&&page>0){
+        return page;
+
+    }else if (tableView==_centerTableView&&page==0) {
+        return 2;
+
+    }else if(tableView==_centerTableView&&page>0&&page<_dataArray.count-1){
+        return page+1;
+
+    }else if (tableView==_centerTableView&&page==_dataArray.count-1) {
+        return page;
+    }else if(tableView==_rightTableView&&page==_dataArray.count-1){
+        return page+2;
+
+    }else if(tableView==_rightTableView&&page<_dataArray.count-1){
+        return page+1;
+    }
+    
+    return 0;
+
+}
+
+/**
+ *  @author mangues, 15-09-08 16:09:29
+ *
+ *  根据 text 获取label的高度
+ *
+ *  @param tableView
+ *
+ *  @return
+ */
+-(NSArray*)getHeightHeaderInSection:(UITableView*)tableView{
+    AnswerModel *model = [self getAnswerModel:tableView];
+    UIFont *font = [UIFont systemFontOfSize:(CGFloat)16];
+    NSString *str;
+    if([model.mtype intValue] == 1){//选择题
+        str = [[Tools getAnswerWithString:model.mquestion] objectAtIndex:0];
+        
+    }else{
+        str = model.mquestion;
+    }
+    
+    CGFloat height = [Tools getSizeWithString:str withFont:font withSize:CGSizeMake(tableView.frame.size.width-20, 400)].height+20;
+    if (height<80) {
+        height = 80;
+    }
+    
+    NSString *hei = [NSString stringWithFormat:@"%f",height];
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:str,hei,nil];
+    return array;
+}
+
+
+
+
 @end
