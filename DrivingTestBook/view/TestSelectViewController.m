@@ -127,7 +127,9 @@
  *  @param indexPath
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.navigationController pushViewController:[[AnsmerViewController alloc]init] animated:YES];
+    AnsmerViewController *cool = [[AnsmerViewController alloc]init];
+    cool.number =(int)indexPath.row;
+    [self.navigationController pushViewController:cool animated:YES];
 }
 
 

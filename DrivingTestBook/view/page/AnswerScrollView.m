@@ -8,6 +8,8 @@
 
 #import "AnswerScrollView.h"
 #import "AnswerTableViewCell.h"
+#import "AnswerModel.h"
+#import "Tools.h"
 #define SIZE self.frame.size
 @interface AnswerScrollView()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>{
     
@@ -24,6 +26,7 @@
 -(instancetype)initWithFrame:(CGRect)frame anddataArray:(NSArray *)array{
     self = [super initWithFrame:frame];
     if (self) {
+        _currentPage = 1;
         _dataArray = array;
         _scrollView = [[UIScrollView alloc]initWithFrame:frame];
         _scrollView.delegate = self;
@@ -44,10 +47,6 @@
         _centerTableView.scrollEnabled = NO;
         _rightTableView.scrollEnabled = NO;
 
-        
-        
-        
-        
         //设置分页
         _scrollView.pagingEnabled = YES;
         //默认为YES，用来设置scrollView的弹簧效果
@@ -102,6 +101,27 @@
         cell.numberLabel.layer.cornerRadius = 10;
     }
     cell.numberLabel.text = [NSString stringWithFormat:@"%c",(char)('A'+indexPath.row)];
+    
+    AnswerModel *model= [[AnswerModel alloc]init];
+    if (tableView==_leftTableView&&_currentPage==0) { //第一页
+        model = _dataArray[_currentPage];
+    }else if(tableView==_leftTableView&&_currentPage>0){
+        model = _dataArray[_currentPage-1];
+    }else if (tableView==_centerTableView&&_currentPage==0) {
+        model = _dataArray[_currentPage+1];
+    }else if(tableView==_centerTableView&&_currentPage>0&&_currentPage<_dataArray.count-1){
+        model = _dataArray[_currentPage];
+    }else if (tableView==_centerTableView&&_currentPage==_dataArray.count-1) {
+        model = _dataArray[_currentPage-1];
+    }else if(tableView==_rightTableView&&_currentPage==_dataArray.count-1){
+        model = _dataArray[_currentPage];
+    }else if(tableView==_rightTableView&&_currentPage<_dataArray.count-1){
+        model = _dataArray[_currentPage+1];
+    }
+    
+    if ([model.mtype intValue]==1) {
+        cell.contentAn.text = [[Tools getAnswerWithString:model.mquestion] objectAtIndex:indexPath.row+1];
+    }
     return cell;
 }
 
@@ -115,12 +135,20 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     CGPoint currentOffset = scrollView.contentOffset;
     int page = (int)currentOffset.x/SIZE.width;//滑动到了第几页
-    if (page<_dataArray.count - 1) {
+    if (page<_dataArray.count - 1&&page>0) {
         _scrollView.contentSize = CGSizeMake(currentOffset.x+SIZE.width*2, 0);
         _centerTableView.frame = CGRectMake(currentOffset.x, 0, SIZE.width, SIZE.height);
         _leftTableView.frame = CGRectMake(currentOffset.x - SIZE.width, 0, SIZE.width, SIZE.height);
         _rightTableView.frame = CGRectMake(currentOffset.x + SIZE.width, 0, SIZE.width, SIZE.height);
     }
-    
+    _currentPage = page;
+    [self reloadData];   //重新加载数据
+}
+
+
+-(void)reloadData{
+    [_leftTableView reloadData];
+    [_centerTableView reloadData];
+    [_rightTableView reloadData];
 }
 @end

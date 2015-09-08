@@ -10,6 +10,8 @@
 		39502C9B1B953A1400D67CDC /* TestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39502C9A1B953A1400D67CDC /* TestSelectViewController.m */; };
 		39502CA11B95503700D67CDC /* TestSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39502C9F1B95503700D67CDC /* TestSelectTableViewCell.m */; };
 		39502CA21B95503700D67CDC /* TestSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39502CA01B95503700D67CDC /* TestSelectTableViewCell.xib */; };
+		3969F2EC1B9D34D8005FC8D7 /* AnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3969F2EB1B9D34D8005FC8D7 /* AnswerModel.m */; };
+		3969F2F31B9D4807005FC8D7 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3969F2F21B9D4807005FC8D7 /* Tools.m */; };
 		396BFE841B8FF9C200A51E5D /* SelectCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396BFE831B8FF9C200A51E5D /* SelectCarView.m */; };
 		396BFE871B900A1200A51E5D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 396BFE861B900A1200A51E5D /* FirstViewController.m */; };
 		396BFE8C1B90244C00A51E5D /* FirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 396BFE8A1B90244C00A51E5D /* FirstTableViewCell.m */; };
@@ -253,6 +255,11 @@
 		39502C9E1B95503700D67CDC /* TestSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSelectTableViewCell.h; sourceTree = "<group>"; };
 		39502C9F1B95503700D67CDC /* TestSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSelectTableViewCell.m; sourceTree = "<group>"; };
 		39502CA01B95503700D67CDC /* TestSelectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSelectTableViewCell.xib; sourceTree = "<group>"; };
+		3969F2EA1B9D34D8005FC8D7 /* AnswerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerModel.h; sourceTree = "<group>"; };
+		3969F2EB1B9D34D8005FC8D7 /* AnswerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerModel.m; sourceTree = "<group>"; };
+		3969F2EF1B9D391C005FC8D7 /* MGDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGDefine.h; sourceTree = "<group>"; };
+		3969F2F11B9D4807005FC8D7 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		3969F2F21B9D4807005FC8D7 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		396BFE821B8FF9C200A51E5D /* SelectCarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCarView.h; sourceTree = "<group>"; };
 		396BFE831B8FF9C200A51E5D /* SelectCarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCarView.m; sourceTree = "<group>"; };
 		396BFE851B900A1200A51E5D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
@@ -480,8 +487,8 @@
 		399741FF1B9C1FA2006FDFE9 /* KCDbManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KCDbManager.m; sourceTree = "<group>"; };
 		399742001B9C1FA2006FDFE9 /* KCSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KCSingleton.h; sourceTree = "<group>"; };
 		399742021B9C200E006FDFE9 /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		399742061B9C2659006FDFE9 /* TestSelectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestSelectModel.h; path = model/TestSelectModel.h; sourceTree = "<group>"; };
-		399742071B9C2659006FDFE9 /* TestSelectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestSelectModel.m; path = model/TestSelectModel.m; sourceTree = "<group>"; };
+		399742061B9C2659006FDFE9 /* TestSelectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSelectModel.h; sourceTree = "<group>"; };
+		399742071B9C2659006FDFE9 /* TestSelectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSelectModel.m; sourceTree = "<group>"; };
 		399742091B9C2CC2006FDFE9 /* AnswerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerScrollView.h; sourceTree = "<group>"; };
 		3997420A1B9C2CC2006FDFE9 /* AnswerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerScrollView.m; sourceTree = "<group>"; };
 		3997420C1B9C3CAF006FDFE9 /* AnswerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTableViewCell.h; sourceTree = "<group>"; };
@@ -510,6 +517,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3969F2ED1B9D3703005FC8D7 /* define */ = {
+			isa = PBXGroup;
+			children = (
+				3969F2EF1B9D391C005FC8D7 /* MGDefine.h */,
+			);
+			name = define;
+			sourceTree = "<group>";
+		};
+		3969F2F01B9D47EE005FC8D7 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				3969F2F11B9D4807005FC8D7 /* Tools.h */,
+				3969F2F21B9D4807005FC8D7 /* Tools.m */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
 		396BFE801B8FF95E00A51E5D /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,6 +619,8 @@
 		3991D0521B8F287100E88819 /* DrivingTestBook */ = {
 			isa = PBXGroup;
 			children = (
+				3969F2F01B9D47EE005FC8D7 /* util */,
+				3969F2ED1B9D3703005FC8D7 /* define */,
 				399741F81B9C1E07006FDFE9 /* data */,
 				399740AA1B9C1CE9006FDFE9 /* fibs */,
 				396BFE911B90293500A51E5D /* model */,
@@ -866,8 +892,6 @@
 		399741F81B9C1E07006FDFE9 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				399742061B9C2659006FDFE9 /* TestSelectModel.h */,
-				399742071B9C2659006FDFE9 /* TestSelectModel.m */,
 				399742051B9C2552006FDFE9 /* model */,
 				399741FC1B9C1E64006FDFE9 /* data.sqlite */,
 				399741FD1B9C1F86006FDFE9 /* common */,
@@ -890,9 +914,12 @@
 		399742051B9C2552006FDFE9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				399742061B9C2659006FDFE9 /* TestSelectModel.h */,
+				399742071B9C2659006FDFE9 /* TestSelectModel.m */,
+				3969F2EA1B9D34D8005FC8D7 /* AnswerModel.h */,
+				3969F2EB1B9D34D8005FC8D7 /* AnswerModel.m */,
 			);
-			name = model;
-			path = data/model;
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1187,8 +1214,10 @@
 				3991D05C1B8F287100E88819 /* ViewController.m in Sources */,
 				3991D0591B8F287100E88819 /* AppDelegate.m in Sources */,
 				399740B81B9C1D4A006FDFE9 /* FMDatabasePool.m in Sources */,
+				3969F2F31B9D4807005FC8D7 /* Tools.m in Sources */,
 				399742011B9C1FA2006FDFE9 /* KCDbManager.m in Sources */,
 				399740B91B9C1D4A006FDFE9 /* FMDatabaseQueue.m in Sources */,
+				3969F2EC1B9D34D8005FC8D7 /* AnswerModel.m in Sources */,
 				396BFE8C1B90244C00A51E5D /* FirstTableViewCell.m in Sources */,
 				399741FB1B9C1E27006FDFE9 /* MyDataManager.m in Sources */,
 				39502CA11B95503700D67CDC /* TestSelectTableViewCell.m in Sources */,

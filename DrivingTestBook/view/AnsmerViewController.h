@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AnsmerViewController : UIViewController
-
+@property (nonatomic,assign) int number;  //章节
 @end

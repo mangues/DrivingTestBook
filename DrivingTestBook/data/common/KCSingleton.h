@@ -32,5 +32,4 @@ static className *_instance;\
     });\
     return _instance;\
 }
-
 #endif
